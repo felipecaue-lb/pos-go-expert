@@ -1,0 +1,30 @@
+FROM golang:latest
+
+# Create user
+RUN useradd -m -u 1000 felipecaue && \
+    mkdir -p /app && \
+    chown -R felipecaue:felipecaue /app /go
+
+# Install required tools
+RUN apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Go tools
+RUN go install github.com/cweill/gotests/gotests@latest && \
+    go install github.com/fatih/gomodifytags@latest && \
+    go install github.com/josharian/impl@latest && \
+    go install github.com/haya14busa/goplay/cmd/goplay@latest && \
+    go install github.com/go-delve/delve/cmd/dlv@latest && \
+    go install honnef.co/go/tools/cmd/staticcheck@latest && \
+    go install golang.org/x/tools/gopls@latest && \
+    go install golang.org/x/tools/cmd/goimports@latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Switch to non-root user
+USER felipecaue
+
+# Command to run the application
+CMD ["tail", "-f", "/dev/null"]

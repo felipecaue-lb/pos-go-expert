@@ -1,0 +1,13 @@
+CEP: Rua Tamoios
+Logradouro: 38408-383
+Complemento: até 554/555
+Unidade: 
+Bairro: Vigilato Pereira
+Localidade: Uberlândia
+UF: MG
+Estado: Minas Gerais
+Região: Sudeste
+IBGE: 3170206
+GIA: 
+DDD: 34
+SIAFI: 5403

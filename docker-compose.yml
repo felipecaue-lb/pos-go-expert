@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  go-app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    env_file:
+      - ./docker/.env
+    user: "1000:1000"
+    volumes:
+      - ./src:/app
+      - go-tools:/go
+      - ~/.gitconfig:/home/felipecaue/.gitconfig
+    ports:
+      - "8080:8080"
+    working_dir: /app
+    environment:
+      - USER_ID=1000
+      - GROUP_ID=1000
+      - GOPATH=/go
+      - PATH=/usr/local/go/bin:/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - HOME=/home/felipecaue
+    tty: true
+
+  mysql-db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  go-tools:
+  mysql-data:
