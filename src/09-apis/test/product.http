@@ -1,0 +1,29 @@
+POST http://localhost:8080/products HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "price": 999.99
+}
+
+###
+
+GET http://localhost:8080/products HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NzE5Mzc0ODMsInN1YiI6IjUxMzAxMmMzLTk2NmQtNDk2Ni05ODAwLTg1YzlkMTM3MDE3ZCJ9.UB8PQCtRl-D9-Bl7y4S2-xbICF1sHkoX5bz20Se3hqM
+
+###
+
+GET http://localhost:8080/products/9bf3cad2-7827-4a20-8969-36396069f08e HTTP/1.1
+
+###
+
+PUT http://localhost:8080/products/9bf3cad2-7827-4a20-8969-36396069f08e HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Laptop Pro",
+  "price": 1299.99
+}
+
+###
+DELETE http://localhost:8080/products/9bf3cad2-7827-4a20-8969-36396069f08e HTTP/1.1

@@ -8,6 +8,7 @@ ARG GROUP_ID=1000
 RUN apt-get update && apt-get install -y \
     git \
 	bash \
+    vim \
     && rm -rf /var/lib/apt/lists/* \
 	&& groupadd -g $GROUP_ID felipecaue \
     && useradd -m -u $USER_ID -g felipecaue -s /bin/bash felipecaue \
@@ -22,7 +23,8 @@ RUN go install github.com/cweill/gotests/gotests@latest && \
     go install github.com/go-delve/delve/cmd/dlv@latest && \
     go install honnef.co/go/tools/cmd/staticcheck@latest && \
     go install golang.org/x/tools/gopls@latest && \
-    go install golang.org/x/tools/cmd/goimports@latest
+    go install golang.org/x/tools/cmd/goimports@latest && \
+    go install github.com/swaggo/swag/cmd/swag@latest
 
 # Set the working directory inside the container
 WORKDIR /app
