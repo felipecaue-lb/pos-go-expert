@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     git \
 	bash \
     vim \
+    apache2-utils \
     && rm -rf /var/lib/apt/lists/* \
 	&& groupadd -g $GROUP_ID felipecaue \
     && useradd -m -u $USER_ID -g felipecaue -s /bin/bash felipecaue \
