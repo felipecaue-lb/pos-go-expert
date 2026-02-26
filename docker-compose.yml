@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   go-app:
     build:
@@ -31,6 +29,18 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+  
+  rabbitmq:
+    image: rabbitmq:4-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "15692:15692"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+      - RABBITMQ_DEFAULT_VHOST=/
 
 volumes:
   go-tools:
