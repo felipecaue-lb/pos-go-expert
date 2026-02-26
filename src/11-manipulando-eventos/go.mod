@@ -1,4 +1,4 @@
-module github.com/felipecaue-lb/fc-utils
+module github.com/felipecaue-lb/pos-go-expert/src/11-manipulando-eventos
 
 go 1.25.0
 
