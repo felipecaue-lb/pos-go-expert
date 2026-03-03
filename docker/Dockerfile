@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
 	bash \
     vim \
     apache2-utils \
+    sqlite3 \
+    libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/* \
 	&& groupadd -g $GROUP_ID felipecaue \
     && useradd -m -u $USER_ID -g felipecaue -s /bin/bash felipecaue \
