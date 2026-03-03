@@ -16,7 +16,12 @@
         "go.toolsManagement.autoUpdate": true,
         "go.useLanguageServer": true
       },
-      "extensions": ["golang.go", "graphql.vscode-graphql", "bowlerr.sqlite-intelliview-vscode"]
+      "extensions": [
+        "golang.go",
+        "graphql.vscode-graphql",
+        "bowlerr.sqlite-intelliview-vscode",
+        "drblury.protobuf-vsc"
+      ]
     }
   }
 }
