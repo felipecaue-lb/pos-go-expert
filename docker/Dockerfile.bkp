@@ -1,21 +1,23 @@
 FROM golang:latest
 
+# Permite passar UID/GID na build
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+
 # Install required tools
 RUN apt-get update && apt-get install -y \
     git \
-    bash \
+	bash \
     vim \
     apache2-utils \
     sqlite3 \
     libsqlite3-dev \
     protobuf-compiler \
-    gosu \
     && rm -rf /var/lib/apt/lists/* \
-    && mkdir -p /app
-
-# Copy entrypoint script
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+	&& groupadd -g $GROUP_ID felipecaue \
+    && useradd -m -u $USER_ID -g felipecaue -s /bin/bash felipecaue \
+    && mkdir -p /app \
+    && chown -R felipecaue:felipecaue /app /go
 
 # Install Go tools
 RUN go install github.com/cweill/gotests/gotests@latest && \
@@ -32,12 +34,14 @@ RUN go install github.com/cweill/gotests/gotests@latest && \
     go install github.com/ktr0731/evans@latest && \
     go install github.com/spf13/cobra-cli@latest
 
-# Install migrate CLI e SqlC
+# Install migrate CLI
 RUN go install -tags 'postgres mysql sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-RUN go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 
 # Set the working directory inside the container
 WORKDIR /app
 
-ENTRYPOINT ["entrypoint.sh"]
+# Switch to non-root user
+USER felipecaue
+
+# Command to run the application
 CMD ["tail", "-f", "/dev/null"]
