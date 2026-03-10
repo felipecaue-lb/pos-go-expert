@@ -36,6 +36,9 @@ RUN go install github.com/cweill/gotests/gotests@latest && \
 RUN go install -tags 'postgres mysql sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 RUN go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 
+# Install Wire
+RUN go install github.com/google/wire/cmd/wire@latest
+
 # Set the working directory inside the container
 WORKDIR /app
 
